@@ -34,5 +34,10 @@ public class MemberBean {
 		return "/member/loginPro";
 	}
 	
+	@RequestMapping("notice.com")
+	public String notice() throws Exception{
+		return "/member/notice";
+	}
+	
 
 }
