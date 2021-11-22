@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		 xmlns="http://xmlns.jcp.org/xml/ns/javaee" 
+		 xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" 
+		 id="WebApp_ID" version="3.1">
+		 
+		 
+	<!-- encoding 설정(post방식) -->
+	<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	
+	<!-- encoding 매핑할 주소 설정(모든 주소) -->
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>		 
+	
+	<!-- servlet 설정 -->
+	<!-- <param-value> : Controller를 만들 경로 지정 
+						 본인이 만든 controller 자바 파일 경로 추가
+						 단, controller 파일을 만들고 나서 추가해야 한다.
+						 추가 안하고 실행 시키면 아예 작동 안됨 -->
+	<!-- controller 설정 : xml 파일 지정 -->
+	<servlet>
+		<servlet-name>kanBu</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>
+				/WEB-INF/spring/root-context.xml
+				/WEB-INF/spring/appServlet/servlet-context.xml
+			</param-value>
+		</init-param>
+	</servlet>
+	
+	<!-- servlet 매핑
+		 사용자 지정 확장자
+		 ex) localhost:9081/kanbu/main.com	=> servlet 매핑 되어 실행됨
+		     localhost:9081/kanbu/main.jsp  => .com으로 끝나지 않기 때문에 servlet 실행이 되지 않아 매핑이 안됨 => 에러 -->
+	<servlet-mapping>
+		<servlet-name>kanBu</servlet-name>
+		<url-pattern>*.com</url-pattern>
+	</servlet-mapping>
+	
+	<!-- 에러페이지 처리 -->
+	
+
+</web-app>
